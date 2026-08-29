@@ -1,35 +1,39 @@
+// pages/ProfilePage.tsx
+
 import { useState } from 'react'
-import { EditIcon, CameraIcon, MapPinIcon, StarIcon, BookmarkIcon, CheckIcon, BriefcaseIcon } from '../components/Icons'
+import { EditIcon, CameraIcon, MapPinIcon, StarIcon, BookmarkIcon, CheckIcon } from '../components/Icons'
+import { User, talents } from '../data/data'
 
 interface Props {
   navigate: (page: string, params?: Record<string, string>) => void
   userType: 'talent' | 'client'
+  currentUser: User
 }
 
-const myPortfolio = [
-  { title: 'Identidad Corporativa NicaBank', img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop' },
-  { title: 'App Móvil Delivery', img: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=300&fit=crop' },
-  { title: 'Campaña Digital Navidad', img: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=300&fit=crop' },
-]
+export default function ProfilePage({ navigate, userType, currentUser }: Props) {
+  const talent = talents.find(t => t.id === currentUser.talentId)
 
-const myReviews = [
-  { author: 'Juan M.', rating: 5, comment: 'Excelente trabajo, muy creativa.', date: 'Ago 2026' },
-  { author: 'Sofía R.', rating: 5, comment: 'Entregó antes del plazo. Recomendada.', date: 'Jul 2026' },
-]
-
-export default function ProfilePage({ navigate, userType }: Props) {
   const [editing, setEditing] = useState(false)
-  const [bio, setBio] = useState('Diseñadora gráfica y UX con 4 años de experiencia creando soluciones visuales impactantes para empresas nicaragüenses y latinoamericanas.')
-  const [skills, setSkills] = useState(['Figma', 'Illustrator', 'Photoshop', 'UX/UI', 'Branding', 'Canva'])
+  const [bio, setBio] = useState(talent?.bio || currentUser.bio || '')
+  const [skills, setSkills] = useState<string[]>(talent?.skills || currentUser.skills || [])
   const [newSkill, setNewSkill] = useState('')
   const [activeTab, setActiveTab] = useState<'about' | 'portfolio' | 'reviews'>('about')
-  const completion = 50
+
+  const isTalent = userType === 'talent' && talent
+  const completion = isTalent ? 50 : 100
+
+  const myPortfolio = talent?.portfolio || [
+    { title: 'Proyecto de diseño', img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop' },
+    { title: 'App Móvil', img: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=300&fit=crop' },
+  ]
+
+  const myReviews = talent?.reviewsList || [
+    { author: 'Usuario', rating: 5, comment: 'Excelente trabajo.', date: 'Ago 2026' },
+  ]
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 pb-10">
-      {/* Profile Card */}
       <div className="bg-white rounded-2xl shadow-sm border border-[#e2e8f0] overflow-hidden mb-4">
-        {/* Cover */}
         <div className="h-24 nictalent-gradient relative">
           <button className="absolute top-3 right-3 p-2 bg-white/20 rounded-xl text-white hover:bg-white/30 transition-colors">
             <CameraIcon size={16} />
@@ -37,12 +41,11 @@ export default function ProfilePage({ navigate, userType }: Props) {
         </div>
 
         <div className="px-4 pb-4">
-          {/* Avatar */}
           <div className="relative -mt-10 mb-3 flex items-end justify-between">
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=200&fit=crop"
-                alt="Mi perfil"
+                src={currentUser.photo}
+                alt={currentUser.name}
                 className="w-20 h-20 rounded-2xl object-cover border-4 border-white shadow-lg"
               />
               <button className="absolute bottom-0 right-0 w-6 h-6 bg-[#1E56FF] rounded-full flex items-center justify-center border-2 border-white">
@@ -57,36 +60,40 @@ export default function ProfilePage({ navigate, userType }: Props) {
             </button>
           </div>
 
-          {/* Info */}
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-lg font-bold text-[#0a1628]">Ana Herrera</h1>
+              <h1 className="text-lg font-bold text-[#0a1628]">{currentUser.name}</h1>
               <span className="w-5 h-5 bg-[#1EE6FF]/20 rounded-full flex items-center justify-center">
                 <CheckIcon size={10} className="text-[#0022AB]" />
               </span>
             </div>
-            <p className="text-sm text-[#64748b]">Diseñadora Gráfica & UX</p>
+            <p className="text-sm text-[#64748b]">{talent?.role || currentUser.bio || 'Usuario'}</p>
             <div className="flex items-center gap-3 mt-1 text-xs text-[#64748b]">
               <span className="flex items-center gap-1">
                 <MapPinIcon size={12} />
-                Managua, Nicaragua
+                {talent?.location || currentUser.location || 'Nicaragua'}
               </span>
-              <span className="flex items-center gap-1">
-                <StarIcon size={12} />
-                <span className="font-semibold text-[#0a1628]">4.9</span>
-                <span>(32 reseñas)</span>
-              </span>
+              {talent?.rating && (
+                <span className="flex items-center gap-1">
+                  <StarIcon size={12} />
+                  <span className="font-semibold text-[#0a1628]">{talent.rating}</span>
+                  <span>({talent.reviews} reseñas)</span>
+                </span>
+              )}
             </div>
-            <div className="flex items-center gap-2 mt-2">
-              <span className="px-2 py-1 bg-[#dcfce7] text-[#16a34a] text-[10px] font-bold rounded-full">Disponible</span>
-              <span className="text-xs font-bold text-[#1E56FF]">$28/hr</span>
-            </div>
+            {talent?.hourlyRate && (
+              <div className="flex items-center gap-2 mt-2">
+                <span className={`px-2 py-1 rounded-full text-[10px] font-bold ${talent.available ? 'bg-[#dcfce7] text-[#16a34a]' : 'bg-[#fef3c7] text-[#92400e]'}`}>
+                  {talent.available ? 'Disponible' : 'Ocupado'}
+                </span>
+                <span className="text-xs font-bold text-[#1E56FF]">${talent.hourlyRate}/hr</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Profile Completion */}
-      {userType === 'talent' && completion < 100 && (
+      {isTalent && completion < 100 && (
         <div className="bg-gradient-to-r from-[#f0f4ff] to-[#e8f0ff] border border-[#c7d7ff] rounded-2xl p-4 mb-4">
           <div className="flex items-center justify-between mb-2">
             <div>
@@ -104,7 +111,7 @@ export default function ProfilePage({ navigate, userType }: Props) {
               { label: 'Datos personales', done: true },
               { label: 'Habilidades', done: true },
               { label: 'Portafolio', done: false },
-              { label: 'Reseñas (3)', done: false },
+              { label: 'Reseñas', done: false },
             ].map(({ label, done }) => (
               <span key={label} className={`flex items-center gap-1 ${done ? 'text-[#10B981]' : 'text-[#94a3b8]'}`}>
                 {done ? '✓' : '○'} {label}
@@ -114,21 +121,6 @@ export default function ProfilePage({ navigate, userType }: Props) {
         </div>
       )}
 
-      {/* Quick Stats */}
-      <div className="grid grid-cols-3 gap-3 mb-4">
-        {[
-          { label: 'Proyectos', value: '12', color: '#1E56FF', bg: '#eef2ff' },
-          { label: 'Reseñas', value: '32', color: '#D4A017', bg: '#fffbeb' },
-          { label: 'Guardados', value: '45', color: '#10B981', bg: '#f0fdf4' },
-        ].map(({ label, value, color, bg }) => (
-          <div key={label} className="bg-white rounded-2xl p-3 shadow-sm border border-[#e2e8f0] text-center">
-            <p className="text-2xl font-extrabold" style={{ color }}>{value}</p>
-            <p className="text-[11px] text-[#64748b] font-medium mt-0.5">{label}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Tabs */}
       <div className="flex gap-1 bg-white rounded-xl p-1 border border-[#e2e8f0] mb-4">
         {(['about', 'portfolio', 'reviews'] as const).map(tab => (
           <button
@@ -141,13 +133,12 @@ export default function ProfilePage({ navigate, userType }: Props) {
         ))}
       </div>
 
-      {/* Tab Content */}
       {activeTab === 'about' && (
         <div className="space-y-4">
           <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#e2e8f0]">
             <div className="flex items-center justify-between mb-2">
               <h3 className="font-bold text-[#0a1628] text-sm">Sobre mí</h3>
-              {editing && <button onClick={() => {}} className="text-[#1E56FF] text-xs font-medium">Editar</button>}
+              {editing && <button className="text-[#1E56FF] text-xs font-medium">Editar</button>}
             </div>
             {editing ? (
               <textarea
@@ -157,7 +148,7 @@ export default function ProfilePage({ navigate, userType }: Props) {
                 className="w-full bg-[#f0f4ff] rounded-xl px-3 py-2 text-sm text-[#0a1628] outline-none focus:ring-2 ring-[#1E56FF] resize-none"
               />
             ) : (
-              <p className="text-sm text-[#64748b] leading-relaxed">{bio}</p>
+              <p className="text-sm text-[#64748b] leading-relaxed">{bio || 'Sin descripción'}</p>
             )}
           </div>
 
@@ -189,7 +180,6 @@ export default function ProfilePage({ navigate, userType }: Props) {
             </div>
           </div>
 
-          {/* Settings shortcuts */}
           <div className="bg-white rounded-2xl shadow-sm border border-[#e2e8f0] overflow-hidden">
             {[
               { label: 'Configuración de cuenta', action: () => navigate('settings') },
@@ -230,25 +220,30 @@ export default function ProfilePage({ navigate, userType }: Props) {
 
       {activeTab === 'reviews' && (
         <div className="space-y-3">
-          <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#e2e8f0] flex items-center gap-4">
-            <div className="text-center">
-              <p className="text-4xl font-extrabold text-[#0a1628]">4.9</p>
-              <div className="flex gap-0.5 justify-center mt-1">
-                {[1,2,3,4,5].map(i => <StarIcon key={i} size={14} />)}
-              </div>
-              <p className="text-xs text-[#64748b] mt-0.5">32 reseñas</p>
-            </div>
-            <div className="flex-1 space-y-1">
-              {[5,4,3,2,1].map(stars => (
-                <div key={stars} className="flex items-center gap-2">
-                  <span className="text-xs text-[#64748b] w-3">{stars}</span>
-                  <div className="flex-1 h-1.5 bg-[#f1f5f9] rounded-full overflow-hidden">
-                    <div className="h-full bg-[#D4A017] rounded-full" style={{ width: stars === 5 ? '80%' : stars === 4 ? '15%' : '5%' }} />
-                  </div>
+          {talent?.rating && (
+            <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#e2e8f0] flex items-center gap-4">
+              <div className="text-center">
+                <p className="text-4xl font-extrabold text-[#0a1628]">{talent.rating}</p>
+                <div className="flex gap-0.5 justify-center mt-1">
+                  {[1, 2, 3, 4, 5].map(i => <StarIcon key={i} size={14} />)}
                 </div>
-              ))}
+                <p className="text-xs text-[#64748b] mt-0.5">{talent.reviews} reseñas</p>
+              </div>
+              <div className="flex-1 space-y-1">
+                {[5, 4, 3, 2, 1].map(stars => {
+                  const pct = stars === 5 ? 70 : stars === 4 ? 20 : stars === 3 ? 10 : 0
+                  return (
+                    <div key={stars} className="flex items-center gap-2">
+                      <span className="text-xs text-[#64748b] w-3">{stars}</span>
+                      <div className="flex-1 h-1.5 bg-[#f1f5f9] rounded-full overflow-hidden">
+                        <div className="h-full bg-[#D4A017] rounded-full" style={{ width: `${pct}%` }} />
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-          </div>
+          )}
           {myReviews.map((rev, i) => (
             <div key={i} className="bg-white rounded-2xl p-4 shadow-sm border border-[#e2e8f0]">
               <div className="flex items-center justify-between mb-2">

@@ -1,9 +1,12 @@
+// pages/NotificationsPage.tsx
+
 import { useState } from 'react'
 import { BriefcaseIcon, MessageIcon, StarIcon, ShieldIcon, BellIcon } from '../components/Icons'
-import { notifications as initialNotifs } from '../data/data'
+import { notifications as initialNotifs, User } from '../data/data'
 
 interface Props {
   navigate: (page: string, params?: Record<string, string>) => void
+  currentUser: User
 }
 
 const typeConfig = {
@@ -14,14 +17,29 @@ const typeConfig = {
   system: { icon: BellIcon, color: '#64748b', bg: '#f8fafc' },
 }
 
-export default function NotificationsPage({ navigate }: Props) {
-  const [notifs, setNotifs] = useState(initialNotifs)
+export default function NotificationsPage({ navigate, currentUser }: Props) {
+  // Filtrar notificaciones del usuario actual
+  const userNotifs = initialNotifs.filter(n => n.userId === currentUser.id)
+  const [notifs, setNotifs] = useState(userNotifs)
 
   const markAllRead = () => setNotifs(prev => prev.map(n => ({ ...n, read: true })))
   const markRead = (id: string) => setNotifs(prev => prev.map(n => n.id === id ? { ...n, read: true } : n))
 
   const unread = notifs.filter(n => !n.read)
   const read = notifs.filter(n => n.read)
+
+  if (notifs.length === 0) {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-6">
+        <h1 className="text-xl font-bold text-[#0a1628] mb-6">Notificaciones</h1>
+        <div className="text-center py-16">
+          <span className="text-5xl">🔔</span>
+          <p className="text-[#0a1628] font-semibold mt-4">Sin notificaciones</p>
+          <p className="text-sm text-[#64748b] mt-1">Aquí aparecerán tus notificaciones</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6">
@@ -63,14 +81,6 @@ export default function NotificationsPage({ navigate }: Props) {
           </div>
         </div>
       )}
-
-      {notifs.length === 0 && (
-        <div className="text-center py-16">
-          <span className="text-5xl">🔔</span>
-          <p className="text-[#0a1628] font-semibold mt-4">Sin notificaciones</p>
-          <p className="text-sm text-[#64748b] mt-1">Aquí aparecerán tus notificaciones</p>
-        </div>
-      )}
     </div>
   )
 }
@@ -92,11 +102,10 @@ function NotifCard({ notif, onRead, navigate }: {
   return (
     <button
       onClick={handleClick}
-      className={`w-full flex items-start gap-3 p-4 rounded-2xl border transition-all text-left hover:shadow-sm ${
-        !notif.read
+      className={`w-full flex items-start gap-3 p-4 rounded-2xl border transition-all text-left hover:shadow-sm ${!notif.read
           ? 'bg-white border-[#c7d7ff] shadow-sm'
           : 'bg-white/70 border-[#e2e8f0]'
-      }`}
+        }`}
     >
       <div
         className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"

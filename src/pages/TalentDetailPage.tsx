@@ -1,13 +1,16 @@
+// pages/TalentDetailPage.tsx
+
 import { useState } from 'react'
 import { ChevronLeftIcon, StarIcon, MapPinIcon, BookmarkIcon, MessageIcon, CheckIcon } from '../components/Icons'
-import { talents } from '../data/data'
+import { talents, User } from '../data/data'
 
 interface Props {
   talentId: string
   navigate: (page: string, params?: Record<string, string>) => void
+  currentUser: User
 }
 
-export default function TalentDetailPage({ talentId, navigate }: Props) {
+export default function TalentDetailPage({ talentId, navigate, currentUser }: Props) {
   const talent = talents.find(t => t.id === talentId)
   const [saved, setSaved] = useState(talent?.saved || false)
   const [activeTab, setActiveTab] = useState<'about' | 'portfolio' | 'reviews'>('about')
@@ -26,7 +29,6 @@ export default function TalentDetailPage({ talentId, navigate }: Props) {
 
   return (
     <div className="max-w-2xl mx-auto">
-      {/* Header */}
       <div className="sticky top-0 z-10 bg-[#f0f4ff] px-4 pt-4 pb-2 flex items-center gap-2">
         <button
           onClick={() => navigate('explore')}
@@ -44,7 +46,6 @@ export default function TalentDetailPage({ talentId, navigate }: Props) {
       </div>
 
       <div className="px-4 pb-8">
-        {/* Profile Hero */}
         <div className="bg-white rounded-2xl p-5 shadow-sm border border-[#e2e8f0] mb-4">
           <div className="flex items-start gap-4">
             <div className="relative">
@@ -82,10 +83,9 @@ export default function TalentDetailPage({ talentId, navigate }: Props) {
             </div>
           </div>
 
-          {/* Action Buttons */}
           <div className="flex gap-3 mt-4">
             <button
-              onClick={() => navigate('messages', { convId: 'conv1' })}
+              onClick={() => navigate('messages', { convId: `conv${talent.id}` })}
               className="flex-1 flex items-center justify-center gap-2 py-3 border-2 border-[#1E56FF] text-[#1E56FF] rounded-xl font-semibold text-sm hover:bg-[#f0f4ff] transition-colors"
             >
               <MessageIcon size={16} />
@@ -100,7 +100,6 @@ export default function TalentDetailPage({ talentId, navigate }: Props) {
           </div>
         </div>
 
-        {/* Tabs */}
         <div className="flex gap-1 bg-white rounded-xl p-1 border border-[#e2e8f0] mb-4">
           {(['about', 'portfolio', 'reviews'] as const).map(tab => (
             <button
@@ -113,7 +112,6 @@ export default function TalentDetailPage({ talentId, navigate }: Props) {
           ))}
         </div>
 
-        {/* Tab Content */}
         {activeTab === 'about' && (
           <div className="space-y-4">
             <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#e2e8f0]">
@@ -165,19 +163,18 @@ export default function TalentDetailPage({ talentId, navigate }: Props) {
 
         {activeTab === 'reviews' && (
           <div className="space-y-3">
-            {/* Rating Summary */}
             <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#e2e8f0] flex items-center gap-4">
               <div className="text-center">
                 <p className="text-4xl font-extrabold text-[#0a1628]">{talent.rating}</p>
                 <div className="flex gap-0.5 justify-center mt-1">
-                  {[1,2,3,4,5].map(i => (
+                  {[1, 2, 3, 4, 5].map(i => (
                     <StarIcon key={i} size={14} />
                   ))}
                 </div>
                 <p className="text-xs text-[#64748b] mt-0.5">{talent.reviews} reseñas</p>
               </div>
               <div className="flex-1 space-y-1">
-                {[5,4,3,2,1].map(stars => {
+                {[5, 4, 3, 2, 1].map(stars => {
                   const pct = stars === 5 ? 70 : stars === 4 ? 20 : stars === 3 ? 10 : 0
                   return (
                     <div key={stars} className="flex items-center gap-2">

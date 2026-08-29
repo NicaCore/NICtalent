@@ -1,9 +1,12 @@
+// pages/CoinsPage.tsx
+
 import { useState } from 'react'
 import { WalletIcon, TrendingIcon, XIcon } from '../components/Icons'
-import { transactions } from '../data/data'
+import { transactions, User } from '../data/data'
 
 interface Props {
   navigate: (page: string) => void
+  currentUser: User
 }
 
 const packs = [
@@ -13,10 +16,11 @@ const packs = [
   { id: 'p4', amount: 500, price: 35, bonus: '+100 bonus' },
 ]
 
-export default function CoinsPage({ navigate }: Props) {
-  const [balance, setBalance] = useState(120)
+export default function CoinsPage({ navigate, currentUser }: Props) {
+  const userTransactions = transactions.filter(t => t.userId === currentUser.id)
+  const [balance, setBalance] = useState(currentUser.coins || 120)
   const [showRecharge, setShowRecharge] = useState(false)
-  const [localTx, setLocalTx] = useState(transactions)
+  const [localTx, setLocalTx] = useState(userTransactions)
   const [recharged, setRecharged] = useState(false)
   const [selectedPack, setSelectedPack] = useState<string | null>(null)
 
@@ -27,17 +31,46 @@ export default function CoinsPage({ navigate }: Props) {
     const total = pack.amount + bonus
     setBalance(prev => prev + total)
     setLocalTx(prev => [
-      { id: `t${Date.now()}`, type: 'credit' as const, amount: total, description: `Recarga de ${pack.amount} monedas`, date: 'Ahora' },
+      { id: `t${Date.now()}`, userId: currentUser.id, type: 'credit' as const, amount: total, description: `Recarga de ${pack.amount} monedas`, date: 'Ahora' },
       ...prev,
     ])
     setRecharged(true)
+  }
+
+  if (localTx.length === 0) {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-6">
+        <h1 className="text-xl font-bold text-[#0a1628] mb-5">Mis Monedas</h1>
+        <div className="nictalent-gradient rounded-2xl p-6 text-white shadow-lg mb-5">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+              <WalletIcon size={22} className="text-white" />
+            </div>
+            <div>
+              <p className="text-white/75 text-xs font-medium">Saldo disponible</p>
+              <p className="text-3xl font-extrabold">{balance} <span className="text-lg font-semibold text-white/80">monedas</span></p>
+            </div>
+          </div>
+          <button
+            onClick={() => setShowRecharge(true)}
+            className="mt-4 w-full py-3 bg-white text-[#1E56FF] rounded-xl font-bold text-sm hover:bg-[#f0f4ff] transition-colors"
+          >
+            Recargar monedas
+          </button>
+        </div>
+        <div className="text-center py-8 bg-white rounded-2xl border border-[#e2e8f0]">
+          <span className="text-4xl">💰</span>
+          <p className="text-[#0a1628] font-semibold mt-3">Sin transacciones</p>
+          <p className="text-sm text-[#64748b]">Aún no tienes movimientos en tu cuenta</p>
+        </div>
+      </div>
+    )
   }
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6">
       <h1 className="text-xl font-bold text-[#0a1628] mb-5">Mis Monedas</h1>
 
-      {/* Balance Card */}
       <div className="nictalent-gradient rounded-2xl p-6 text-white shadow-lg mb-5">
         <div className="flex items-center gap-3 mb-3">
           <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
@@ -60,7 +93,6 @@ export default function CoinsPage({ navigate }: Props) {
         </button>
       </div>
 
-      {/* How to use */}
       <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#e2e8f0] mb-5">
         <h3 className="font-bold text-[#0a1628] text-sm mb-3">¿Cómo usar las monedas?</h3>
         <div className="space-y-2">
@@ -81,7 +113,6 @@ export default function CoinsPage({ navigate }: Props) {
         </div>
       </div>
 
-      {/* Transaction History */}
       <div>
         <h2 className="font-bold text-[#0a1628] text-sm mb-3">Historial de transacciones</h2>
         <div className="space-y-2">
@@ -102,7 +133,6 @@ export default function CoinsPage({ navigate }: Props) {
         </div>
       </div>
 
-      {/* Recharge Modal */}
       {showRecharge && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center p-4" onClick={() => { setShowRecharge(false); setRecharged(false); setSelectedPack(null) }}>
           <div className="bg-white rounded-3xl w-full max-w-md p-6 animate-slide-up" onClick={e => e.stopPropagation()}>

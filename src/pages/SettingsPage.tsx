@@ -1,9 +1,13 @@
+// pages/SettingsPage.tsx
+
 import { useState } from 'react'
-import { UserIcon, BellIcon, ShieldIcon, GlobeIcon, HelpIcon, LogoutIcon, ChevronRightIcon, CheckIcon } from '../components/Icons'
+import { UserIcon, BellIcon, ShieldIcon, GlobeIcon, HelpIcon, LogoutIcon, ChevronRightIcon } from '../components/Icons'
+import { User } from '../data/data'
 
 interface Props {
   navigate: (page: string) => void
   onLogout: () => void
+  currentUser: User
 }
 
 interface SettingItem {
@@ -17,14 +21,14 @@ interface SettingItem {
   danger?: boolean
 }
 
-export default function SettingsPage({ navigate, onLogout }: Props) {
+export default function SettingsPage({ navigate, onLogout, currentUser }: Props) {
   const [notifProjects, setNotifProjects] = useState(true)
   const [notifMessages, setNotifMessages] = useState(true)
   const [notifReviews, setNotifReviews] = useState(true)
   const [notifSystem, setNotifSystem] = useState(false)
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false)
   const [editEmail, setEditEmail] = useState(false)
-  const [email, setEmail] = useState('ana.herrera@gmail.com')
+  const [email, setEmail] = useState(currentUser.email)
 
   const sections: { title: string; items: SettingItem[] }[] = [
     {
@@ -66,16 +70,15 @@ export default function SettingsPage({ navigate, onLogout }: Props) {
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 pb-10">
-      {/* Profile summary */}
       <div className="flex items-center gap-3 bg-white rounded-2xl p-4 shadow-sm border border-[#e2e8f0] mb-5">
         <img
-          src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=200&fit=crop"
-          alt="Perfil"
+          src={currentUser.photo}
+          alt={currentUser.name}
           className="w-14 h-14 rounded-xl object-cover"
         />
         <div>
-          <h2 className="font-bold text-[#0a1628]">Ana Herrera</h2>
-          <p className="text-sm text-[#64748b]">Diseñadora Gráfica & UX</p>
+          <h2 className="font-bold text-[#0a1628]">{currentUser.name}</h2>
+          <p className="text-sm text-[#64748b]">{currentUser.bio || 'Usuario'}</p>
           <p className="text-xs text-[#94a3b8]">{email}</p>
         </div>
         <button
@@ -86,7 +89,6 @@ export default function SettingsPage({ navigate, onLogout }: Props) {
         </button>
       </div>
 
-      {/* Settings Sections */}
       {sections.map(section => (
         <div key={section.title} className="mb-5">
           <p className="text-xs font-bold text-[#94a3b8] uppercase tracking-wider mb-2 px-1">{section.title}</p>
@@ -123,7 +125,6 @@ export default function SettingsPage({ navigate, onLogout }: Props) {
         </div>
       ))}
 
-      {/* Logout */}
       <button
         onClick={() => setShowLogoutConfirm(true)}
         className="w-full flex items-center justify-center gap-2 py-3.5 bg-[#fff1f2] border border-[#fecdd3] text-red-500 rounded-2xl font-semibold text-sm hover:bg-[#ffe4e6] transition-colors"
@@ -132,7 +133,6 @@ export default function SettingsPage({ navigate, onLogout }: Props) {
         Cerrar sesión
       </button>
 
-      {/* Logout Confirm Modal */}
       {showLogoutConfirm && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl w-full max-w-sm p-6 text-center animate-scale-in">
@@ -159,7 +159,6 @@ export default function SettingsPage({ navigate, onLogout }: Props) {
         </div>
       )}
 
-      {/* Edit Email Modal */}
       {editEmail && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl w-full max-w-sm p-6 animate-scale-in">

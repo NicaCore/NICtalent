@@ -1,12 +1,15 @@
+// pages/SavedPage.tsx
+
 import { useState } from 'react'
 import { BookmarkIcon, StarIcon, MapPinIcon, XIcon } from '../components/Icons'
-import { talents, projects } from '../data/data'
+import { talents, projects, User } from '../data/data'
 
 interface Props {
   navigate: (page: string, params?: Record<string, string>) => void
+  currentUser: User
 }
 
-export default function SavedPage({ navigate }: Props) {
+export default function SavedPage({ navigate, currentUser }: Props) {
   const [tab, setTab] = useState<'talents' | 'projects'>('talents')
   const [savedTalents, setSavedTalents] = useState<string[]>(talents.filter(t => t.saved).map(t => t.id))
   const [savedProjects, setSavedProjects] = useState<string[]>(projects.filter(p => p.saved).map(p => p.id))
@@ -18,7 +21,6 @@ export default function SavedPage({ navigate }: Props) {
     <div className="max-w-2xl mx-auto px-4 py-6">
       <h1 className="text-xl font-bold text-[#0a1628] mb-4">Guardados</h1>
 
-      {/* Tabs */}
       <div className="flex gap-1 bg-white rounded-xl p-1 border border-[#e2e8f0] mb-4">
         <button
           onClick={() => setTab('talents')}

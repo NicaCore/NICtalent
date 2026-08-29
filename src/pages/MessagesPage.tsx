@@ -1,32 +1,59 @@
+// pages/MessagesPage.tsx
+
 import { useState } from 'react'
 import { SearchIcon, SendIcon, ChevronLeftIcon } from '../components/Icons'
-import { conversations, chatMessages } from '../data/data'
+import { conversations, chatMessages, User } from '../data/data'
 
 interface Props {
   navigate: (page: string, params?: Record<string, string>) => void
   initialConvId?: string
+  currentUser: User
 }
 
-export default function MessagesPage({ navigate, initialConvId }: Props) {
+export default function MessagesPage({ navigate, initialConvId, currentUser }: Props) {
   const [activeConv, setActiveConv] = useState<string | null>(initialConvId || null)
   const [search, setSearch] = useState('')
   const [message, setMessage] = useState('')
   const [localMessages, setLocalMessages] = useState(chatMessages)
 
-  const filtered = conversations.filter(c => !search || c.name.toLowerCase().includes(search.toLowerCase()))
-  const conv = activeConv ? conversations.find(c => c.id === activeConv) : null
+  const userConversations = conversations.filter(c => c.participants.includes(currentUser.id))
+
+  const filtered = userConversations.filter(c =>
+    !search || c.name.toLowerCase().includes(search.toLowerCase())
+  )
+
+  const conv = activeConv ? userConversations.find(c => c.id === activeConv) : null
   const msgs = activeConv ? (localMessages[activeConv] || []) : []
 
   const sendMessage = () => {
     if (!message.trim() || !activeConv) return
-    const newMsg = { id: `m${Date.now()}`, from: 'me' as const, text: message.trim(), time: 'Ahora' }
+    const newMsg = {
+      id: `m${Date.now()}`,
+      conversationId: activeConv,
+      from: currentUser.id,
+      to: conv?.participants.find(p => p !== currentUser.id) || '',
+      text: message.trim(),
+      time: 'Ahora',
+      read: false
+    }
     setLocalMessages(prev => ({ ...prev, [activeConv]: [...(prev[activeConv] || []), newMsg] }))
     setMessage('')
   }
 
+  if (userConversations.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="text-center">
+          <span className="text-6xl">💬</span>
+          <p className="text-[#0a1628] font-semibold mt-4 text-lg">Sin conversaciones</p>
+          <p className="text-sm text-[#64748b] mt-1">Aún no tienes mensajes</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex h-full max-h-full overflow-hidden">
-      {/* Conversations List */}
       <div className={`flex flex-col bg-white border-r border-[#e2e8f0] ${activeConv ? 'hidden md:flex' : 'flex'} w-full md:w-80 lg:w-96 flex-shrink-0`}>
         <div className="px-4 pt-6 pb-3">
           <h1 className="text-xl font-bold text-[#0a1628] mb-3">Mensajes</h1>
@@ -78,11 +105,9 @@ export default function MessagesPage({ navigate, initialConvId }: Props) {
         </div>
       </div>
 
-      {/* Chat View */}
       <div className={`flex-1 flex flex-col min-w-0 bg-[#f8faff] ${activeConv ? 'flex' : 'hidden md:flex'}`}>
         {conv ? (
           <>
-            {/* Chat Header */}
             <div className="flex items-center gap-3 px-4 py-3.5 bg-white border-b border-[#e2e8f0] shadow-sm">
               <button
                 onClick={() => setActiveConv(null)}
@@ -103,22 +128,23 @@ export default function MessagesPage({ navigate, initialConvId }: Props) {
               </button>
             </div>
 
-            {/* Messages */}
             <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
-              {msgs.map(msg => (
-                <div key={msg.id} className={`flex ${msg.from === 'me' ? 'justify-end' : 'justify-start'}`}>
-                  {msg.from === 'them' && (
-                    <img src={conv.photo} alt="" className="w-8 h-8 rounded-full object-cover mr-2 flex-shrink-0 self-end" />
-                  )}
-                  <div className={`max-w-[75%] px-4 py-2.5 rounded-2xl text-sm ${msg.from === 'me' ? 'bg-[#1E56FF] text-white rounded-br-sm' : 'bg-white text-[#0a1628] border border-[#e2e8f0] rounded-bl-sm'}`}>
-                    <p>{msg.text}</p>
-                    <p className={`text-[10px] mt-1 ${msg.from === 'me' ? 'text-white/60' : 'text-[#94a3b8]'}`}>{msg.time}</p>
+              {msgs.map(msg => {
+                const isFromMe = msg.from === currentUser.id
+                return (
+                  <div key={msg.id} className={`flex ${isFromMe ? 'justify-end' : 'justify-start'}`}>
+                    {!isFromMe && (
+                      <img src={conv.photo} alt="" className="w-8 h-8 rounded-full object-cover mr-2 flex-shrink-0 self-end" />
+                    )}
+                    <div className={`max-w-[75%] px-4 py-2.5 rounded-2xl text-sm ${isFromMe ? 'bg-[#1E56FF] text-white rounded-br-sm' : 'bg-white text-[#0a1628] border border-[#e2e8f0] rounded-bl-sm'}`}>
+                      <p>{msg.text}</p>
+                      <p className={`text-[10px] mt-1 ${isFromMe ? 'text-white/60' : 'text-[#94a3b8]'}`}>{msg.time}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
 
-            {/* Input */}
             <div className="px-4 py-3 bg-white border-t border-[#e2e8f0]">
               <div className="flex items-center gap-2">
                 <input
