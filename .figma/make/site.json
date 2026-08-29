@@ -1,0 +1,10 @@
+{
+  "description": "Provides a complete progressive web app with all screens fully designed and integrated, offering seamless user experience across devices.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

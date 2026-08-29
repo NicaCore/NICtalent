@@ -1,0 +1,271 @@
+- generic [ref=e106]:
+  - main [ref=e127]:
+    - generic [ref=e364]:
+      - generic [ref=e365]:
+        - heading "Explorar talentos" [level=1] [ref=e366]
+        - generic [ref=e367]:
+          - img [ref=e368]
+          - textbox "Buscar servicio o talento..." [active] [ref=e371]
+          - button [ref=e372]:
+            - img [ref=e373]
+        - generic [ref=e374]:
+          - button "Categoría" [ref=e375]
+          - button "Localidad" [ref=e376]
+          - button "Disponibilidad" [ref=e377]
+          - button "Modalidad" [ref=e378]
+      - generic [ref=e380]:
+        - generic [ref=e381]:
+          - button "Todos" [ref=e382]
+          - button "🎨 Diseño" [ref=e383]:
+            - generic [ref=e384]: 🎨
+            - text: Diseño
+          - button "📣 Marketing" [ref=e385]:
+            - generic [ref=e386]: 📣
+            - text: Marketing
+          - button "📷 Fotografía" [ref=e387]:
+            - generic [ref=e388]: 📷
+            - text: Fotografía
+          - button "💻 Programación" [ref=e389]:
+            - generic [ref=e390]: 💻
+            - text: Programación
+          - button "💰 Finanzas" [ref=e391]:
+            - generic [ref=e392]: 💰
+            - text: Finanzas
+          - button "✍️ Redacción" [ref=e393]:
+            - generic [ref=e394]: ✍️
+            - text: Redacción
+          - button "🎬 Video" [ref=e395]:
+            - generic [ref=e396]: 🎬
+            - text: Video
+          - button "🎵 Música" [ref=e397]:
+            - generic [ref=e398]: 🎵
+            - text: Música
+        - paragraph [ref=e399]: 8 talentos encontrados
+        - generic [ref=e400]:
+          - generic [ref=e401] [cursor=pointer]:
+            - generic [ref=e402]:
+              - img "Carice B." [ref=e404]
+              - generic [ref=e406]:
+                - generic [ref=e407]:
+                  - generic [ref=e408]:
+                    - heading "Carice B." [level=3] [ref=e409]
+                    - paragraph [ref=e410]: Diseñadora Gráfica
+                  - button [ref=e411]:
+                    - img [ref=e412]
+                - generic [ref=e414]:
+                  - img [ref=e415]
+                  - generic [ref=e417]: "4.8"
+                  - generic [ref=e418]: (60)
+                - generic [ref=e419]:
+                  - img [ref=e420]
+                  - generic [ref=e423]: Managua
+            - generic [ref=e424]:
+              - generic [ref=e425]: Diseño Gráfico
+              - generic [ref=e426]: Branding
+              - generic [ref=e427]: UI/UX
+            - generic [ref=e428]:
+              - generic [ref=e429]:
+                - text: Desde
+                - generic [ref=e430]: $25/hr
+              - button "Ver perfil" [ref=e431]
+          - generic [ref=e432] [cursor=pointer]:
+            - generic [ref=e433]:
+              - img "Maris G." [ref=e435]
+              - generic [ref=e437]:
+                - generic [ref=e438]:
+                  - generic [ref=e439]:
+                    - heading "Maris G." [level=3] [ref=e440]
+                    - paragraph [ref=e441]: Community Manager
+                  - button [ref=e442]:
+                    - img [ref=e443]
+                - generic [ref=e445]:
+                  - img [ref=e446]
+                  - generic [ref=e448]: "4.9"
+                  - generic [ref=e449]: (39)
+                - generic [ref=e450]:
+                  - img [ref=e451]
+                  - generic [ref=e454]: León
+            - generic [ref=e455]:
+              - generic [ref=e456]: Redes Sociales
+              - generic [ref=e457]: Contenido
+              - generic [ref=e458]: Estrategia
+            - generic [ref=e459]:
+              - generic [ref=e460]:
+                - text: Desde
+                - generic [ref=e461]: $18/hr
+              - button "Ver perfil" [ref=e462]
+          - generic [ref=e463] [cursor=pointer]:
+            - generic [ref=e464]:
+              - img "Jaled L." [ref=e466]
+              - generic [ref=e467]:
+                - generic [ref=e468]:
+                  - generic [ref=e469]:
+                    - heading "Jaled L." [level=3] [ref=e470]
+                    - paragraph [ref=e471]: Editor de Video
+                  - button [ref=e472]:
+                    - img [ref=e473]
+                - generic [ref=e475]:
+                  - img [ref=e476]
+                  - generic [ref=e478]: "4.7"
+                  - generic [ref=e479]: (15)
+                - generic [ref=e480]:
+                  - img [ref=e481]
+                  - generic [ref=e484]: Managua
+            - generic [ref=e485]:
+              - generic [ref=e486]: Edición Video
+              - generic [ref=e487]: After Effects
+              - generic [ref=e488]: YouTube
+              - generic [ref=e489]: Ocupado
+            - generic [ref=e490]:
+              - generic [ref=e491]:
+                - text: Desde
+                - generic [ref=e492]: $22/hr
+              - button "Ver perfil" [ref=e493]
+          - generic [ref=e494] [cursor=pointer]:
+            - generic [ref=e495]:
+              - img "Laura P." [ref=e497]
+              - generic [ref=e499]:
+                - generic [ref=e500]:
+                  - generic [ref=e501]:
+                    - heading "Laura P." [level=3] [ref=e502]
+                    - paragraph [ref=e503]: Fotógrafa
+                  - button [ref=e504]:
+                    - img [ref=e505]
+                - generic [ref=e507]:
+                  - img [ref=e508]
+                  - generic [ref=e510]: "4.9"
+                  - generic [ref=e511]: (41)
+                - generic [ref=e512]:
+                  - img [ref=e513]
+                  - generic [ref=e516]: Managua
+            - generic [ref=e517]:
+              - generic [ref=e518]: Fotografía
+              - generic [ref=e519]: Retratos
+              - generic [ref=e520]: Eventos
+            - generic [ref=e521]:
+              - generic [ref=e522]:
+                - text: Desde
+                - generic [ref=e523]: $30/hr
+              - button "Ver perfil" [ref=e524]
+          - generic [ref=e525] [cursor=pointer]:
+            - generic [ref=e526]:
+              - img "Karah R." [ref=e528]
+              - generic [ref=e530]:
+                - generic [ref=e531]:
+                  - generic [ref=e532]:
+                    - heading "Karah R." [level=3] [ref=e533]
+                    - paragraph [ref=e534]: Desarrolladora Web
+                  - button [ref=e535]:
+                    - img [ref=e536]
+                - generic [ref=e538]:
+                  - img [ref=e539]
+                  - generic [ref=e541]: "4.6"
+                  - generic [ref=e542]: (20)
+                - generic [ref=e543]:
+                  - img [ref=e544]
+                  - generic [ref=e547]: Managua
+            - generic [ref=e548]:
+              - generic [ref=e549]: React
+              - generic [ref=e550]: Node.js
+              - generic [ref=e551]: Full Stack
+            - generic [ref=e552]:
+              - generic [ref=e553]:
+                - text: Desde
+                - generic [ref=e554]: $35/hr
+              - button "Ver perfil" [ref=e555]
+          - generic [ref=e556] [cursor=pointer]:
+            - generic [ref=e557]:
+              - img "Valeria S." [ref=e559]
+              - generic [ref=e561]:
+                - generic [ref=e562]:
+                  - generic [ref=e563]:
+                    - heading "Valeria S." [level=3] [ref=e564]
+                    - paragraph [ref=e565]: Diseñadora UX/UI
+                  - button [ref=e566]:
+                    - img [ref=e567]
+                - generic [ref=e569]:
+                  - img [ref=e570]
+                  - generic [ref=e572]: "4.8"
+                  - generic [ref=e573]: (31)
+                - generic [ref=e574]:
+                  - img [ref=e575]
+                  - generic [ref=e578]: Masaya
+            - generic [ref=e579]:
+              - generic [ref=e580]: UX/UI
+              - generic [ref=e581]: Figma
+              - generic [ref=e582]: Prototipado
+            - generic [ref=e583]:
+              - generic [ref=e584]:
+                - text: Desde
+                - generic [ref=e585]: $28/hr
+              - button "Ver perfil" [ref=e586]
+          - generic [ref=e587] [cursor=pointer]:
+            - generic [ref=e588]:
+              - img "Andrés T." [ref=e590]
+              - generic [ref=e592]:
+                - generic [ref=e593]:
+                  - generic [ref=e594]:
+                    - heading "Andrés T." [level=3] [ref=e595]
+                    - paragraph [ref=e596]: Community Manager
+                  - button [ref=e597]:
+                    - img [ref=e598]
+                - generic [ref=e600]:
+                  - img [ref=e601]
+                  - generic [ref=e603]: "4.7"
+                  - generic [ref=e604]: (18)
+                - generic [ref=e605]:
+                  - img [ref=e606]
+                  - generic [ref=e609]: Estelí
+            - generic [ref=e610]:
+              - generic [ref=e611]: Marketing
+              - generic [ref=e612]: SEO
+              - generic [ref=e613]: Contenido
+            - generic [ref=e614]:
+              - generic [ref=e615]:
+                - text: Desde
+                - generic [ref=e616]: $20/hr
+              - button "Ver perfil" [ref=e617]
+          - generic [ref=e618] [cursor=pointer]:
+            - generic [ref=e619]:
+              - img "Diego R." [ref=e621]
+              - generic [ref=e623]:
+                - generic [ref=e624]:
+                  - generic [ref=e625]:
+                    - heading "Diego R." [level=3] [ref=e626]
+                    - paragraph [ref=e627]: Redactor Web
+                  - button [ref=e628]:
+                    - img [ref=e629]
+                - generic [ref=e631]:
+                  - img [ref=e632]
+                  - generic [ref=e634]: "4.5"
+                  - generic [ref=e635]: (12)
+                - generic [ref=e636]:
+                  - img [ref=e637]
+                  - generic [ref=e640]: Chinandega
+            - generic [ref=e641]:
+              - generic [ref=e642]: Copywriting
+              - generic [ref=e643]: SEO Writing
+              - generic [ref=e644]: Español
+            - generic [ref=e645]:
+              - generic [ref=e646]:
+                - text: Desde
+                - generic [ref=e647]: $15/hr
+              - button "Ver perfil" [ref=e648]
+  - navigation [ref=e336]:
+    - generic [ref=e337]:
+      - button "Inicio" [ref=e338]:
+        - img [ref=e340]
+        - generic [ref=e342]: Inicio
+      - button "Buscar" [ref=e343]:
+        - img [ref=e345]
+        - generic [ref=e348]: Buscar
+      - button [ref=e349]:
+        - img [ref=e350]
+      - button "3 Mensajes" [ref=e351]:
+        - generic [ref=e353]:
+          - img [ref=e354]
+          - generic [ref=e356]: "3"
+        - generic [ref=e357]: Mensajes
+      - button "Más" [ref=e358]:
+        - img [ref=e360]
+        - generic [ref=e363]: Más

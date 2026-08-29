@@ -1,0 +1,221 @@
+- generic [ref=e52]:
+  - complementary [ref=e53]:
+    - generic [ref=e54]:
+      - generic [ref=e56]: "N"
+      - generic [ref=e57]: NICtalent
+    - navigation [ref=e58]:
+      - button "Inicio" [ref=e59]:
+        - img [ref=e60]
+        - generic [ref=e62]: Inicio
+      - button "Buscar" [ref=e63]:
+        - img [ref=e64]
+        - generic [ref=e67]: Buscar
+      - button "Proyectos" [ref=e68]:
+        - img [ref=e69]
+        - generic [ref=e72]: Proyectos
+      - button "Monedas" [ref=e73]:
+        - img [ref=e74]
+        - generic [ref=e78]: Monedas
+      - button "Notificaciones 3" [ref=e79]:
+        - img [ref=e80]
+        - generic [ref=e83]: Notificaciones
+        - generic [ref=e84]: "3"
+      - button "Guardados" [ref=e85]:
+        - img [ref=e86]
+        - generic [ref=e88]: Guardados
+      - button "Mi Perfil" [ref=e89]:
+        - img [ref=e90]
+        - generic [ref=e93]: Mi Perfil
+    - generic [ref=e94]:
+      - button "Configuración" [ref=e95]:
+        - img [ref=e96]
+        - generic [ref=e99]: Configuración
+      - button "Ayuda" [ref=e100]:
+        - img [ref=e101]
+        - generic [ref=e105]: Ayuda
+  - generic [ref=e106]:
+    - banner [ref=e107]:
+      - generic [ref=e109]:
+        - img [ref=e110]
+        - textbox "Busca servicio o talento..." [ref=e113]
+      - generic [ref=e114]:
+        - button "3" [ref=e115]:
+          - img [ref=e116]
+          - generic [ref=e118]: "3"
+        - button "3" [ref=e119]:
+          - img [ref=e120]
+          - generic [ref=e123]: "3"
+        - button "Mi perfil Ana H." [ref=e124]:
+          - img "Mi perfil" [ref=e125]
+          - generic [ref=e126]: Ana H.
+    - main [ref=e127]:
+      - generic [ref=e129]:
+        - generic [ref=e131]:
+          - heading "¡Hola, Ana! 👋" [level=1] [ref=e132]
+          - paragraph [ref=e133]: ¿Qué talento vas a compartir hoy?
+        - generic [ref=e134] [cursor=pointer]:
+          - img [ref=e135]
+          - generic [ref=e138]: Buscar servicio o talento...
+          - button [ref=e139]:
+            - img [ref=e140]
+        - generic [ref=e141]:
+          - button "Soy talento Ofrece tu habilidad y conoce oportunidades." [ref=e142]:
+            - img [ref=e144]
+            - heading "Soy talento" [level=3] [ref=e147]
+            - paragraph [ref=e148]: Ofrece tu habilidad y conoce oportunidades.
+          - button "Busco talento Encuentra el talento ideal para tu proyecto." [ref=e149]:
+            - img [ref=e151]
+            - heading "Busco talento" [level=3] [ref=e154]
+            - paragraph [ref=e155]: Encuentra el talento ideal para tu proyecto.
+        - generic [ref=e156]:
+          - generic [ref=e157]:
+            - generic [ref=e158]:
+              - heading "Impulsa tu talento 🚀" [level=3] [ref=e159]
+              - paragraph [ref=e160]: Completa tu perfil y aumenta tus oportunidades
+            - generic [ref=e161]: 50%
+          - button "Completar perfil" [ref=e164]
+        - generic [ref=e165]:
+          - generic [ref=e166]:
+            - heading "Categorías populares" [level=2] [ref=e167]
+            - button "Ver todas →" [ref=e168]
+          - generic [ref=e169]:
+            - button "🎨 Diseño 142" [ref=e170]:
+              - generic [ref=e171]: 🎨
+              - generic [ref=e172]: Diseño
+              - generic [ref=e173]: "142"
+            - button "📣 Marketing 98" [ref=e174]:
+              - generic [ref=e175]: 📣
+              - generic [ref=e176]: Marketing
+              - generic [ref=e177]: "98"
+            - button "📷 Fotografía 76" [ref=e178]:
+              - generic [ref=e179]: 📷
+              - generic [ref=e180]: Fotografía
+              - generic [ref=e181]: "76"
+            - button "💻 Programación 185" [ref=e182]:
+              - generic [ref=e183]: 💻
+              - generic [ref=e184]: Programación
+              - generic [ref=e185]: "185"
+            - button "💰 Finanzas 54" [ref=e186]:
+              - generic [ref=e187]: 💰
+              - generic [ref=e188]: Finanzas
+              - generic [ref=e189]: "54"
+            - button "✍️ Redacción 63" [ref=e190]:
+              - generic [ref=e191]: ✍️
+              - generic [ref=e192]: Redacción
+              - generic [ref=e193]: "63"
+            - button "🎬 Video 48" [ref=e194]:
+              - generic [ref=e195]: 🎬
+              - generic [ref=e196]: Video
+              - generic [ref=e197]: "48"
+            - button "🎵 Música 29" [ref=e198]:
+              - generic [ref=e199]: 🎵
+              - generic [ref=e200]: Música
+              - generic [ref=e201]: "29"
+        - generic [ref=e202]:
+          - generic [ref=e203]:
+            - heading "Talentos cerca de ti" [level=2] [ref=e204]
+            - button "Ver todos →" [ref=e205]
+          - generic [ref=e206]:
+            - generic [ref=e207] [cursor=pointer]:
+              - generic [ref=e208]:
+                - img "Carice B." [ref=e209]
+                - button [ref=e210]:
+                  - img [ref=e211]
+                - generic [ref=e213]: Disponible
+              - heading "Carice B." [level=3] [ref=e214]
+              - paragraph [ref=e215]: Diseñadora Gráfica
+              - generic [ref=e216]:
+                - img [ref=e217]
+                - generic [ref=e219]: "4.8"
+                - generic [ref=e220]: (60)
+            - generic [ref=e221] [cursor=pointer]:
+              - generic [ref=e222]:
+                - img "Maris G." [ref=e223]
+                - button [ref=e224]:
+                  - img [ref=e225]
+                - generic [ref=e227]: Disponible
+              - heading "Maris G." [level=3] [ref=e228]
+              - paragraph [ref=e229]: Community Manager
+              - generic [ref=e230]:
+                - img [ref=e231]
+                - generic [ref=e233]: "4.9"
+                - generic [ref=e234]: (39)
+            - generic [ref=e235] [cursor=pointer]:
+              - generic [ref=e236]:
+                - img "Jaled L." [ref=e237]
+                - button [ref=e238]:
+                  - img [ref=e239]
+              - heading "Jaled L." [level=3] [ref=e241]
+              - paragraph [ref=e242]: Editor de Video
+              - generic [ref=e243]:
+                - img [ref=e244]
+                - generic [ref=e246]: "4.7"
+                - generic [ref=e247]: (15)
+            - generic [ref=e248] [cursor=pointer]:
+              - generic [ref=e249]:
+                - img "Laura P." [ref=e250]
+                - button [ref=e251]:
+                  - img [ref=e252]
+                - generic [ref=e254]: Disponible
+              - heading "Laura P." [level=3] [ref=e255]
+              - paragraph [ref=e256]: Fotógrafa
+              - generic [ref=e257]:
+                - img [ref=e258]
+                - generic [ref=e260]: "4.9"
+                - generic [ref=e261]: (41)
+            - generic [ref=e262] [cursor=pointer]:
+              - generic [ref=e263]:
+                - img "Karah R." [ref=e264]
+                - button [ref=e265]:
+                  - img [ref=e266]
+                - generic [ref=e268]: Disponible
+              - heading "Karah R." [level=3] [ref=e269]
+              - paragraph [ref=e270]: Desarrolladora Web
+              - generic [ref=e271]:
+                - img [ref=e272]
+                - generic [ref=e274]: "4.6"
+                - generic [ref=e275]: (20)
+            - generic [ref=e276] [cursor=pointer]:
+              - generic [ref=e277]:
+                - img "Valeria S." [ref=e278]
+                - button [ref=e279]:
+                  - img [ref=e280]
+                - generic [ref=e282]: Disponible
+              - heading "Valeria S." [level=3] [ref=e283]
+              - paragraph [ref=e284]: Diseñadora UX/UI
+              - generic [ref=e285]:
+                - img [ref=e286]
+                - generic [ref=e288]: "4.8"
+                - generic [ref=e289]: (31)
+        - generic [ref=e290]:
+          - heading "Notificaciones motivadoras" [level=2] [ref=e291]
+          - generic [ref=e292]:
+            - generic [ref=e293]:
+              - img [ref=e295]
+              - generic [ref=e297]:
+                - paragraph [ref=e298]: ¡Sigue así!
+                - paragraph [ref=e299]: Cada actualización de tu perfil te acerca a nuevas oportunidades.
+            - generic [ref=e300]:
+              - img [ref=e302]
+              - generic [ref=e304]:
+                - paragraph [ref=e305]: Tu talento inspira
+                - paragraph [ref=e306]: Alguien guardó tu perfil en sus favoritos.
+            - generic [ref=e307]:
+              - img [ref=e309]
+              - generic [ref=e312]:
+                - paragraph [ref=e313]: Nuevo proyecto para ti
+                - paragraph [ref=e314]: Tenemos un proyecto que podría ser perfecto para tus habilidades.
+            - generic [ref=e315]:
+              - img [ref=e317]
+              - generic [ref=e319]:
+                - paragraph [ref=e320]: Primer paso completado
+                - paragraph [ref=e321]: ¡Genial! Completa tu portafolio y destaca aún más.
+        - generic [ref=e323]:
+          - generic [ref=e324]:
+            - heading "El talento que necesitas, la oportunidad que buscas." [level=2] [ref=e325]:
+              - text: El talento que necesitas,
+              - text: la oportunidad que buscas.
+            - paragraph [ref=e326]: Conectamos habilidades con oportunidades reales.
+          - generic [ref=e327]:
+            - button "Busca talento" [ref=e328]
+            - button "Publicar proyecto" [ref=e329]
